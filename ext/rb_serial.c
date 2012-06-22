@@ -45,7 +45,7 @@ static VALUE my_read(VALUE self, VALUE b2read)
 static VALUE my_write(VALUE self, VALUE data)
 {
     int retval;
-    retval = writeport(RSTRING(data)->heap->len, STR2CSTR(data), &cfd);
+    retval = writeport(RSTRING(data)->as->heap->len, STR2CSTR(data), &cfd);
     return (retval == -1) ? Qnil : rb_int_new(retval);
 }
 
