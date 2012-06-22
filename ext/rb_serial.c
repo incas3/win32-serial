@@ -7,7 +7,7 @@ HANDLE cfd;
 static VALUE my_open(VALUE self, VALUE comport)
 {
     int retval;
-    retval = openport(STR2CSTR(rb_str_concat(rb_str_new2("\\\\.\\"), comport)), &cfd);
+    retval = openport(StringValuePtr(rb_str_concat(rb_str_new2("\\\\.\\"), comport)), &cfd);
     return (retval == -1) ? Qnil : Qtrue;
 }
 
@@ -45,7 +45,7 @@ static VALUE my_read(VALUE self, VALUE b2read)
 static VALUE my_write(VALUE self, VALUE data)
 {
     int retval;
-    retval = writeport(RSTRING(data)->as.heap.len, STR2CSTR(data), &cfd);
+    retval = writeport(RSTRING(data)->as.heap.len, StringValuePtr(data), &cfd);
     return (retval == -1) ? Qnil : rb_int_new(retval);
 }
 
