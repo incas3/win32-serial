@@ -6,8 +6,11 @@ HANDLE cfd;
 
 static VALUE my_open(VALUE self, VALUE comport)
 {
-    int retval;
-    retval = openport(StringValuePtr(rb_str_concat(rb_str_new2("\\\\.\\"), comport)), &cfd);
+   int retval;
+    VALUE v = rb_str_concat(rb_str_new2("\\\\.\\"),comport);
+    
+    //retval = openport(StringValueCStr(rb_str_concat(rb_str_new2("\\\\.\\"), comport)), &cfd);
+    retval = openport(StringValuePtr(v),&cfd);
     return (retval == -1) ? Qnil : Qtrue;
 }
 
